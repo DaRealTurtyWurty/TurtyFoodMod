@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[48,)"
+license="LGPLv3"
+# issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
+[[mods]]
+modId="turtyfoodmod"
+version="${file.jarVersion}"
+displayName="Turty's Food Mod"
+# logoFile="turtyfoodmod.png"
+authors="TurtyWurty"
+displayTest="MATCH_VERSION"
+description='''food'''
+
+[[dependencies.turtyfoodmod]]
+    modId="forge"
+    mandatory=true
+    versionRange="[48.0.33,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.turtyfoodmod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.2,1.21)"
+    ordering="NONE"
+    side="BOTH"

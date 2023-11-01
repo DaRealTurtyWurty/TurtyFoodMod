@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "dev.turtywurty.turtyfoodmod.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "turtyfoodmod.refmap.json",
+  "mixins": [],
+  "client": [],
+  "minVersion": "0.8.5"
+}
