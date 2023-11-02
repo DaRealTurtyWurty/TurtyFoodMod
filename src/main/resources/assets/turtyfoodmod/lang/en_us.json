@@ -1,4 +1,7 @@
 {
+  "itemGroup.turtyfoodmod.food": "Turty's Food",
   "item.turtyfoodmod.burger": "Burger",
-  "itemGroup.turtyfoodmod.food": "Turty's Food"
+  "item.turtyfoodmod.tomato": "Tomato",
+  "item.turtyfoodmod.lettuce": "Lettuce",
+  "item.turtyfoodmod.bun": "Bun"
 }
