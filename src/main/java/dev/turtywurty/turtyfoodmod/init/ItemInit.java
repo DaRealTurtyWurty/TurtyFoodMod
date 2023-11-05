@@ -18,4 +18,10 @@ public class ItemInit {
 
     public static final RegistryObject<Item> LETTUCE = ITEMS.register("lettuce",
             () -> new Item(new Item.Properties().food(FoodInit.LETTUCE)));
+
+    public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese",
+            () -> new Item(new Item.Properties().food(FoodInit.CHEESE)));
+
+    public static final RegistryObject<Item> TOMATO_SLICE = ITEMS.register("tomato_slice",
+            () -> new Item(new Item.Properties().food(FoodInit.TOMATO_SLICE)));
 }

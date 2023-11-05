@@ -18,4 +18,15 @@ public class FoodInit {
             .nutrition(3)
             .saturationMod(0.6F)
             .build();
+
+    protected static final FoodProperties CHEESE = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationMod(0.2F)
+            .build();
+
+    protected static final FoodProperties TOMATO_SLICE = new FoodProperties.Builder()
+            .nutrition(1)
+            .saturationMod(0.1F)
+            .fast()
+            .build();
 }
