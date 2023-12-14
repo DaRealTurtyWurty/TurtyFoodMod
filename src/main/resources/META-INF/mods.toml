@@ -10,17 +10,3 @@ displayName="Turty's Food Mod"
 authors="TurtyWurty"
 displayTest="MATCH_VERSION"
 description='''food'''
-
-[[dependencies.turtyfoodmod]]
-    modId="forge"
-    mandatory=true
-    versionRange="[48.0.33,)"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.turtyfoodmod]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.20.2,1.21)"
-    ordering="NONE"
-    side="BOTH"

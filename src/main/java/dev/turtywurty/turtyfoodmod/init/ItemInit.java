@@ -1,7 +1,9 @@
 package dev.turtywurty.turtyfoodmod.init;
 
 import dev.turtywurty.turtyfoodmod.TurtyFoodMod;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -24,4 +26,15 @@ public class ItemInit {
 
     public static final RegistryObject<Item> TOMATO_SLICE = ITEMS.register("tomato_slice",
             () -> new Item(new Item.Properties().food(FoodInit.TOMATO_SLICE)));
+
+    private static void registerBlockItems() {
+        for (RegistryObject<Block> block : BlockInit.BLOCKS.getEntries()) {
+            String name = block.getId().getPath();
+            ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        }
+    }
+
+    static {
+        registerBlockItems();
+    }
 }

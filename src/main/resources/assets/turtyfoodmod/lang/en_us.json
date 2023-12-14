@@ -4,5 +4,8 @@
   "item.turtyfoodmod.tomato": "Tomato",
   "item.turtyfoodmod.lettuce": "Lettuce",
   "item.turtyfoodmod.cheese": "Cheese",
-  "item.turtyfoodmod.tomato_slice": "Tomato Slice"
+  "item.turtyfoodmod.tomato_slice": "Tomato Slice",
+  "block.turtyfoodmod.blender": "Blender",
+  "container.turtyfoodmod.blender": "Blender",
+  "block.turtyfoodmod.creative_energy_generator": "Creative Energy Generator"
 }

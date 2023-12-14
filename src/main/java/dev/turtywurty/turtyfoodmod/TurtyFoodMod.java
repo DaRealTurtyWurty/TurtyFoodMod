@@ -1,8 +1,7 @@
 package dev.turtywurty.turtyfoodmod;
 
 import com.mojang.logging.LogUtils;
-import dev.turtywurty.turtyfoodmod.init.CreativeTabInit;
-import dev.turtywurty.turtyfoodmod.init.ItemInit;
+import dev.turtywurty.turtyfoodmod.init.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -18,6 +17,10 @@ public class TurtyFoodMod {
 
         ItemInit.ITEMS.register(bus);
         CreativeTabInit.CREATIVE_TABS.register(bus);
+        BlockInit.BLOCKS.register(bus);
+        BlockEntityTypeInit.BLOCK_ENTITY_TYPES.register(bus);
+        MenuTypeInit.MENU_TYPES.register(bus);
+        RecipeSerializerInit.RECIPE_SERIALIZERS.register(bus);
 
         LOGGER.info("Turty Food Mod has been loaded!");
     }

@@ -1,0 +1,16 @@
+{
+  "type": "turtyfoodmod:blender",
+  "inputs": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "turtyfoodmod:cheese"
+    }
+  ],
+  "output":{
+    "id": "minecraft:oak_planks",
+    "Count": 1
+  },
+  "process_time": 200
+}
