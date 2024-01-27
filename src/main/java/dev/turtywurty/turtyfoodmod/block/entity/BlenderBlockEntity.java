@@ -9,6 +9,7 @@ import dev.turtywurty.turtyfoodmod.client.screen.BlenderScreen;
 import dev.turtywurty.turtyfoodmod.init.BlockEntityTypeInit;
 import dev.turtywurty.turtyfoodmod.menu.BlenderMenu;
 import dev.turtywurty.turtyfoodmod.recipe.BlenderRecipe;
+import mcp.client.Start;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -47,6 +48,8 @@ public class BlenderBlockEntity extends SyncedBlockEntity implements TickableBlo
 
     private static final int ENERGY_COST = 100;
     private int progress = 0, maxProgress = 0;
+
+    private ResourceLocation previousRecipe = null;
     private @Nullable RecipeHolder<BlenderRecipe> currentRecipe = null;
 
     private final ContainerData containerData = new ContainerData() {
@@ -82,14 +85,27 @@ public class BlenderBlockEntity extends SyncedBlockEntity implements TickableBlo
 
         if (this.currentRecipe == null) {
             this.currentRecipe = getRecipe().orElse(null);
+            if (this.currentRecipe == null) {
+                // start decrementing progress if there is no recipe
+                if (this.progress > 0)
+                    this.progress--;
+                else {
+                    this.maxProgress = 0;
+                    this.previousRecipe = null;
+                }
 
-            if (this.currentRecipe == null)
                 return;
+            }
 
-            this.progress = 0;
+            this.previousRecipe = this.currentRecipe.id();
             this.maxProgress = this.currentRecipe.value().getProcessTime();
-            setChanged();
-            sync();
+        } else if (this.previousRecipe != null) {
+            // Check if the recipe has changed by seeing what the new recipe would be
+            RecipeHolder<BlenderRecipe> newRecipe = getRecipe().orElse(null);
+            if (newRecipe == null || !newRecipe.id().equals(this.previousRecipe)) {
+                this.currentRecipe = null;
+                return;
+            }
         }
 
         if (this.energy.getEnergyStored() >= ENERGY_COST) {
@@ -103,6 +119,7 @@ public class BlenderBlockEntity extends SyncedBlockEntity implements TickableBlo
                 this.currentRecipe.value().assemble(this);
 
                 this.currentRecipe = null;
+                this.previousRecipe = null;
             }
         }
     }

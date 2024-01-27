@@ -1,5 +1,6 @@
 package dev.turtywurty.turtyfoodmod.block;
 
+import com.mojang.serialization.MapCodec;
 import dev.turtywurty.turtyfoodmod.block.entity.BlenderBlockEntity;
 import dev.turtywurty.turtyfoodmod.block.entity.util.SyncedEnergyStorage;
 import dev.turtywurty.turtyfoodmod.block.entity.util.TickableBlockEntity;
@@ -26,6 +27,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class BlenderBlock extends HorizontalDirectionalBlock implements EntityBlock {
+    private static final MapCodec<BlenderBlock> CODEC = simpleCodec(BlenderBlock::new);
+
     public static final BooleanProperty RUNNING = BooleanProperty.create("running");
 
     public BlenderBlock(Properties pProperties) {
@@ -34,6 +37,11 @@ public class BlenderBlock extends HorizontalDirectionalBlock implements EntityBl
         registerDefaultState(this.stateDefinition.any()
                 .setValue(RUNNING, false)
                 .setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override

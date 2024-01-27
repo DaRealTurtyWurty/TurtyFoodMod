@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,running=false": { "model": "turtyfoodmod:blender" },
+    "facing=north,running=true": { "model": "turtyfoodmod:blender" },
+    "facing=south,running=false": { "model": "turtyfoodmod:blender", "y": 180 },
+    "facing=south,running=true": { "model": "turtyfoodmod:blender", "y": 180 },
+    "facing=west,running=false": { "model": "turtyfoodmod:blender", "y": 270 },
+    "facing=west,running=true": { "model": "turtyfoodmod:blender", "y": 270 },
+    "facing=east,running=false": { "model": "turtyfoodmod:blender", "y": 90 },
+    "facing=east,running=true": { "model": "turtyfoodmod:blender", "y": 90 }
+  }
+}

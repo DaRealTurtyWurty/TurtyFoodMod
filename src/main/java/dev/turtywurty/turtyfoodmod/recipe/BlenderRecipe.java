@@ -17,6 +17,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlenderRecipe implements Recipe<Container> {
@@ -61,15 +62,31 @@ public class BlenderRecipe implements Recipe<Container> {
         ItemStack input1 = pContainer.getItem(1);
         ItemStack input2 = pContainer.getItem(2);
 
-        if (matches(input0, input1, input2)) {
-            return this.output.copy();
-        }
-
-        return ItemStack.EMPTY;
+        return matches(input0, input1, input2) ? this.output.copy() : ItemStack.EMPTY;
     }
 
-    public boolean matches(ItemStack input0, ItemStack input1, ItemStack input2) {
-        return this.inputs.get(0).test(input0) && this.inputs.get(1).test(input1) && this.inputs.get(2).test(input2);
+    // check if it matches ignoring order
+    // if the recipe has an empty ingredient, then the matching will allow for any item
+    public boolean matches(ItemStack... inputs) {
+        List<Boolean> matched = new ArrayList<>(inputs.length);
+
+        for (int i = 0; i < inputs.length; i++) {
+            matched.add(false);
+        }
+
+        for (Ingredient recipeIngredient : this.inputs) {
+            for (int inputIndex = 0; inputIndex < inputs.length; inputIndex++) {
+                ItemStack input = inputs[inputIndex];
+
+                if (!matched.get(inputIndex) && recipeIngredient.test(input)) {
+                    matched.set(inputIndex, true);
+                    break; // Move to the next recipe ingredient
+                }
+            }
+        }
+
+        // Check if all ingredients were matched
+        return matched.stream().allMatch(Boolean::valueOf);
     }
 
     @Override
@@ -98,11 +115,17 @@ public class BlenderRecipe implements Recipe<Container> {
         ItemStack input2 = blenderBlockEntity.getInput2().getStackInSlot(0);
 
         if (matches(input0, input1, input2)) {
-            blenderBlockEntity.getInput0().extractItem(0, 1, false);
-            blenderBlockEntity.getInput1().extractItem(0, 1, false);
-            blenderBlockEntity.getInput2().extractItem(0, 1, false);
-
             blenderBlockEntity.getOutput().insertItem(0, this.output.copy(), false);
+
+            // Remove the items from the inputs that were used
+            for (Ingredient input : this.inputs) {
+                if(input.test(input0))
+                    blenderBlockEntity.getInput0().extractItem(0, 1, false);
+                else if(input.test(input1))
+                    blenderBlockEntity.getInput1().extractItem(0, 1, false);
+                else if(input.test(input2))
+                    blenderBlockEntity.getInput2().extractItem(0, 1, false);
+            }
         }
     }
 

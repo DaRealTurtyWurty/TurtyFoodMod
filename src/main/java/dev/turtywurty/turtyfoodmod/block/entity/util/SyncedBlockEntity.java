@@ -48,6 +48,7 @@ public abstract class SyncedBlockEntity extends BlockEntity {
 
     public void sync() {
         if (level != null && !level.isClientSide) {
+            setChanged();
             BlockState state = getBlockState();
             level.sendBlockUpdated(worldPosition, state, state, Block.UPDATE_ALL);
         }
